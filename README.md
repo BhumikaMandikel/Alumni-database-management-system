@@ -176,6 +176,6 @@ npm install express mysql cors dotenv
 ```bash
 npm install react react-dom react-router-dom axios
 ```
-
+The system currently has a basic user interface (UI), which provides essential functionalities for viewing and managing alumni, events, and donations. While the UI is functional, it can be enhanced and customized based on specific user needs.
 
 
