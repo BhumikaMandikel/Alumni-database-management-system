@@ -1,0 +1,182 @@
+//You can also choose to execute only the sql part of the triggers and procedure directly in mysql where u constructed the tables
+
+const createTriggersAndProcedure = () => {
+  // Trigger for updating RSVP count
+  const updateRsvpTriggerQuery = `
+    CREATE TRIGGER update_rsvp_count AFTER UPDATE ON invitations FOR EACH ROW
+    BEGIN
+      -- Increment rsvp_count when changing from 'pending' to 'accepted'
+      IF OLD.acceptance_status = 'pending' AND NEW.acceptance_status = 'accepted' THEN
+        UPDATE events SET rsvp_count = rsvp_count + 1 WHERE name = NEW.event_details;
+      END IF;
+
+      -- Decrement rsvp_count when changing from 'accepted' to 'rejected'
+      IF OLD.acceptance_status = 'accepted' AND NEW.acceptance_status = 'rejected' THEN
+        UPDATE events SET rsvp_count = rsvp_count - 1 WHERE name = NEW.event_details;
+      END IF;
+    END;
+  `;
+
+  // Trigger for updating total donations
+  const donationTriggerQuery = `
+    CREATE TRIGGER update_total_donations AFTER INSERT ON donations
+    FOR EACH ROW
+    BEGIN
+      UPDATE alumni 
+      SET donation_amount = donation_amount + NEW.donation_amt
+      WHERE user_id = NEW.alumni_id;
+    END;
+  `;
+
+  // Trigger for checking event status before insert
+  const checkEventStatusTriggerQuery = `
+    CREATE TRIGGER check_event_fixed_status BEFORE INSERT ON invitations FOR EACH ROW
+    BEGIN
+      DECLARE eventFixed INT;
+
+      -- Check the fixed status of the event
+      SELECT fixed INTO eventFixed
+      FROM events
+      WHERE name = NEW.event_details;
+
+      -- If the event is already filled, raise an error to discard the insert
+      IF eventFixed = 1 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'This event is already filled';
+      END IF;
+    END;
+  `;
+
+  // Trigger for ensuring event date is today or in the future (INSERT)
+  const checkFutureDateInsertTriggerQuery = `
+    CREATE TRIGGER check_future_date
+    BEFORE INSERT ON events
+    FOR EACH ROW
+    BEGIN
+      IF NEW.date < CURDATE() THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Event date must be today or in the future.';
+      END IF;
+    END;
+  `;
+
+  // Trigger for ensuring event date is today or in the future (UPDATE)
+  const checkFutureDateUpdateTriggerQuery = `
+    CREATE TRIGGER check_future_date_update
+    BEFORE UPDATE ON events
+    FOR EACH ROW
+    BEGIN
+      IF NEW.date < CURDATE() THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Event date must be today or in the future.';
+      END IF;
+    END;
+  `;
+
+  // Procedure for updating donation status
+  const donationStatusProcedureQuery = `
+    CREATE PROCEDURE update_donation_status (IN p_alumni_id INT)
+    BEGIN
+      DECLARE total_donations DECIMAL(10,2);
+
+      -- Calculate total donation amount for the specified alumni
+      SELECT SUM(donation_amt)
+      INTO total_donations
+      FROM donations
+      WHERE alumni_id = p_alumni_id;
+
+      -- Update donation_status based on total donations
+      IF total_donations > 10000 THEN
+        UPDATE alumni
+        SET donation_status = 'High'
+        WHERE alumni_id = p_alumni_id;
+      ELSEIF total_donations > 5000 THEN
+        UPDATE alumni
+        SET donation_status = 'Medium'
+        WHERE alumni_id = p_alumni_id;
+      ELSEIF total_donations > 1000 THEN
+        UPDATE alumni
+        SET donation_status = 'Low'
+        WHERE alumni_id = p_alumni_id;
+      ELSE
+        UPDATE alumni
+        SET donation_status = NULL
+        WHERE alumni_id = p_alumni_id;
+      END IF;
+    END;
+  `;
+
+  // Trigger for calling the donation status procedure after donation insertion
+  const donationStatusTriggerQuery = `
+    CREATE TRIGGER after_donation_insert
+    AFTER INSERT ON donations
+    FOR EACH ROW
+    BEGIN
+      CALL update_donation_status(NEW.alumni_id);
+    END;
+  `;
+
+  // Execute queries in sequence
+  pool.query(updateRsvpTriggerQuery, (error, results) => {
+    if (error) {
+      console.error('Error creating RSVP trigger:', error);
+    } else {
+      console.log('RSVP trigger created successfully');
+      
+      // Create donation trigger
+      pool.query(donationTriggerQuery, (error, results) => {
+        if (error) {
+          console.error('Error creating donation trigger:', error);
+        } else {
+          console.log('Donation trigger created successfully');
+          
+          // Create event status check trigger
+          pool.query(checkEventStatusTriggerQuery, (error, results) => {
+            if (error) {
+              console.error('Error creating event status trigger:', error);
+            } else {
+              console.log('Event status trigger created successfully');
+              
+              // Create future date triggers
+              pool.query(checkFutureDateInsertTriggerQuery, (error, results) => {
+                if (error) {
+                  console.error('Error creating future date insert trigger:', error);
+                } else {
+                  console.log('Future date insert trigger created successfully');
+
+                  pool.query(checkFutureDateUpdateTriggerQuery, (error, results) => {
+                    if (error) {
+                      console.error('Error creating future date update trigger:', error);
+                    } else {
+                      console.log('Future date update trigger created successfully');
+
+                      // Create donation status procedure
+                      pool.query(donationStatusProcedureQuery, (error, results) => {
+                        if (error) {
+                          console.error('Error creating donation status procedure:', error);
+                        } else {
+                          console.log('Donation status procedure created successfully');
+                          
+                          // Create donation status trigger
+                          pool.query(donationStatusTriggerQuery, (error, results) => {
+                            if (error) {
+                              console.error('Error creating donation status trigger:', error);
+                            } else {
+                              console.log('Donation status trigger created successfully');
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+};
+
+// Call the function to create all triggers and procedures
+createTriggersAndProcedure();
