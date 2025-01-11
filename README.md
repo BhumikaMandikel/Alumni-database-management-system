@@ -93,11 +93,11 @@ Create a .env file in alumni_backend directory and Add the appropriate values fo
 - **DB_NAME**=The name of your MySQL database.
 - **PORT**=The port number your application will run on (e.g., `5000` or any other available port).
 ```env
-- **DB_HOST**=<your_mysql_host>  
-- **DB_USER**=<your_mysql_user>  
-- **DB_PASSWORD**=<your_mysql_password> 
-- **DB_NAME**=<your_mysql_database_name>  
-- **PORT**=<your_application_port> 
+- DB_HOST=<your_mysql_host>  
+- DB_USER=<your_mysql_user>  
+- DB_PASSWORD=<your_mysql_password> 
+- DB_NAME=<your_mysql_database_name>  
+- PORT=<your_application_port> 
 ```
 
 Ensure that your MySQL server is running and the database and tables are set up as described above.
