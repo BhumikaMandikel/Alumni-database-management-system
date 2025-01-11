@@ -339,7 +339,6 @@ app.get('/api/invites', (req, res) => {
   });
 });
 
-//SQLQUERY-1
 // Endpoint to respond to invitations
 app.post('/api/invitations/respond', (req, res) => {
   const { invitationId, response } = req.body;
@@ -358,7 +357,6 @@ app.post('/api/invitations/respond', (req, res) => {
   });
 });
 
-//SQLQUERY-2
 //INVITATION DETAILS
 // Endpoint to get lists of accepted and rejected alumni invitations
 app.get('/api/invites/status', (req, res) => {
@@ -378,7 +376,6 @@ app.get('/api/invites/status', (req, res) => {
   });
 });
 
-//SQLQUERY-3
 //ALUMNI SEARCH BASED ON PARAMETERS FILETERED
 //Creating serach page based on constraints
 app.post('/api/search-page', (req, res) => { 
@@ -465,7 +462,6 @@ app.post('/api/send-invitation-page', (req, res) => {
   });
 });
 
-//SQLQUERY-4
 //totaldonation amount
 app.get('/api/total-donations', (req, res) => {
   const query = `
@@ -481,7 +477,6 @@ app.get('/api/total-donations', (req, res) => {
     res.json(results);
   });
 });
-
 
 //TOTAL DONATION CALCULATED
 // Endpoint to get the total donations received by organisation
@@ -513,7 +508,6 @@ app.get('/api/top-donors', (req, res) => {
   });
 });
 
-//SQLQUERY-5(imp) 
 //personal donations list latest
 app.get('/api/alumni/personal-donations', (req, res) => {
   const alumniId = req.query.alumniId;
@@ -631,10 +625,6 @@ app.get('/api/donations/analysis', async (req, res) => {
 });
 
 //creating the triggers section
-
-
-
-
 
 // Start the server
 app.listen(process.env.PORT, () => {
