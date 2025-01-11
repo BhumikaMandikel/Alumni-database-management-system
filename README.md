@@ -86,13 +86,15 @@ CREATE TABLE invitations (
 
 ### Environment Configuration:
 To connect to the MySQL database, you need to configure your connection settings in a .env file.
-Add the appropriate values for your database connection settings in the .env file:
+Create a .env file in alumni_backend directory and Add the appropriate values for the following variables:
 
+```env
 - **DB_HOST**: The hostname where your MySQL database is hosted (e.g., localhost).
 - **DB_USER**: The MySQL username which has complete access across the database (root user).
 - **DB_PASSWORD**: The MySQL password.
 - **DB_NAME**: The name of your MySQL database.
 -  **PORT**: The port number for your application to run on (e.g., 5000).
+```
 
 Ensure that your MySQL server is running and the database and tables are set up as described above.
 
