@@ -1,0 +1,37 @@
+/* AdminView.css */
+
+.admin-view {
+    padding: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tab:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .tab.active {
+    background-color: #007bff; /* Active tab color */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .tab-content {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

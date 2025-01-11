@@ -1,0 +1,30 @@
+.alumni-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .alumni-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .alumni-table th, .alumni-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .alumni-table th {
+    background-color: #333;
+    color: white;
+  }
+  
+  .alumni-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .alumni-table tr:hover {
+    background-color: #ddd;
+  }
+  

@@ -1,0 +1,115 @@
+/* App.css */
+
+/* Navbar styling */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Center the other items */
+  align-items: center; /* Align items vertically */
+}
+
+.navbar ul li {
+  padding: 14px 20px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar ul li a:hover {
+  background-color: #575757;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 5px;
+}
+
+/* Add this style to push the logout button to the right */
+.navbar ul li.logout {
+  margin-left: auto; /* This will push the logout button to the right */
+}
+
+/* Existing styles... */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+button {
+  padding: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f4f7;
+}
+
+.App {
+  text-align: center;
+}
+
+.main-content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Table Styling for Alumni List */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #1a73e8;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1664c1;
+}

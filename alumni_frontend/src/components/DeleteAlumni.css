@@ -1,0 +1,46 @@
+/* DeleteAlumni.css */
+
+.delete-alumni {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.delete-alumni h1 {
+    text-align: center;
+    color: #333;
+}
+
+.delete-alumni form {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-alumni input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.delete-alumni button {
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-alumni button:hover {
+    background-color: #e60000;
+}
+
+.delete-alumni p {
+    text-align: center;
+    color: #d9534f;
+}

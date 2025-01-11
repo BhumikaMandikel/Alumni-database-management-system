@@ -1,0 +1,46 @@
+/* UpdateAlumni.css */
+
+.update-alumni {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.update-alumni h1 {
+    text-align: center;
+    color: #333;
+}
+
+.update-alumni form {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-alumni input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.update-alumni button {
+    padding: 10px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-alumni button:hover {
+    background-color: #4cae4c;
+}
+
+.update-alumni p {
+    text-align: center;
+    color: #5bc0de;
+}

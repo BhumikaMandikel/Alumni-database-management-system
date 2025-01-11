@@ -1,0 +1,60 @@
+/* Container for the whole page */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+  }
+  
+  /* Title style */
+  .login-title {
+    font-size: 32px;
+    margin-bottom: 20px; /* Space between the title and the form */
+    color: #333;
+  }
+  
+  /* Outer container to centralize the entire form */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Take full width of the container */
+  }
+  
+  /* Inner login form styling */
+  .login-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+  }
+  
+  /* Input fields */
+  .login-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Login button */
+  .login-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
