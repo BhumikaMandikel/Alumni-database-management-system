@@ -89,11 +89,21 @@ To connect to the MySQL database, you need to configure your connection settings
 Create a .env file in alumni_backend directory and Add the appropriate values for the following variables:
 
 ```env
-- **DB_HOST**: The hostname where your MySQL database is hosted (e.g., localhost).
-- **DB_USER**: The MySQL username which has complete access across the database (root user).
-- **DB_PASSWORD**: The MySQL password.
-- **DB_NAME**: The name of your MySQL database.
--  **PORT**: The port number for your application to run on (e.g., 5000).
+- **DB_HOST**=<your_mysql_host>  
+  The hostname where your MySQL database is hosted (e.g., `localhost` or the IP address of the server).
+
+- **DB_USER**=<your_mysql_user>  
+  The MySQL username with full access to the database (e.g., `root` or your custom user).
+
+- **DB_PASSWORD**=<your_mysql_password>  
+  The password for your MySQL user.
+
+- **DB_NAME**=<your_mysql_database_name>  
+  The name of your MySQL database.
+
+- **PORT**=<your_application_port>  
+  The port number your application will run on (e.g., `5000` or any other available port).
+  
 ```
 
 Ensure that your MySQL server is running and the database and tables are set up as described above.
